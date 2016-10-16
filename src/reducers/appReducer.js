@@ -1,4 +1,4 @@
-import Types from '../actions/types';
+import Types from '../action/types';
 import Immutable from 'seamless-immutable';
 import { createReducer } from 'reduxsauce';
 
@@ -8,7 +8,7 @@ export const INITIAL_STATE = Immutable({
 });
 
 const toggleHomePage = (state, action) =>
-  state.set("showHomePage", !state.app.showHomePage)
+  state.set("showHomePage", action.shouldShow)
 
 const toggleContactPage = (state, action) =>
   state.set("showContactPage", !state.app.showContactPage)

@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import Actions from './action/creators';
 import './App.css';
 
 import TransitionGroup from 'react-addons-transition-group';
@@ -6,20 +8,6 @@ import TransitionGroup from 'react-addons-transition-group';
 import HomePage from './components/homepage/homepage';
 
 class App extends Component {
-
-  constructor(props) {
-    super(props)
-    this.state = {
-      shouldShowHomePage: false
-    }
-  }
-
-  toggleHomePage() {
-    this.setState({
-      shouldShowHomePage: !this.state.shouldShowHomePage
-    });
-  }
-
   render() {
     return (
       <div>
@@ -30,13 +18,13 @@ class App extends Component {
         <div className="bottom"></div>
 
         <button
-          onClick={ () => this.toggleHomePage() }
+          onClick={ () => this.props.toggleHomePage(!this.props.shouldShowHomePage) }
           className="btn btn-primary center-block homepage-button">
           Toggle HomePage
         </button>
 
         <TransitionGroup>
-          { this.state.shouldShowHomePage && <HomePage/> }
+          { this.props.shouldShowHomePage && <HomePage/> }
         </TransitionGroup>
 
       </div>
@@ -44,4 +32,21 @@ class App extends Component {
   }
 }
 
-export default App;
+App.propTypes = {
+  shouldShowHomePage: PropTypes.bool,
+  toggleHomePage: PropTypes.func
+};
+
+const mapStateToProps = (state) => {
+  return {
+    shouldShowHomePage: state.app.showHomePage
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    toggleHomePage: (shouldShow) => dispatch(Actions.toggleHomePage(shouldShow))
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TweenMax from 'gsap';
+import { connect } from 'react-redux';
 import './homepage.css';
 
 class HomePage extends Component {
@@ -144,4 +145,10 @@ class HomePage extends Component {
   }
 }
 
-export default HomePage;
+function mapStateToProps(state) {
+  return {
+    app: state.app
+  };
+}
+
+export default connect(mapStateToProps)(HomePage);
