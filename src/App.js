@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import Actions from './action/creators';
 import './App.css';
 
-import TransitionGroup from 'react-addons-transition-group';
-
 import HomePage from './components/homepage/homepage';
 
 class App extends Component {
@@ -23,9 +21,9 @@ class App extends Component {
           Toggle HomePage
         </button>
 
-        <TransitionGroup>
-          { this.props.shouldShowHomePage && <HomePage/> }
-        </TransitionGroup>
+        <HomePage>
+          { this.props.shouldShowHomePage ? <div>Hello World</div> : null }
+        </HomePage>
 
       </div>
     );
