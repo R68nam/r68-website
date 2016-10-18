@@ -4,27 +4,20 @@ import Actions from './action/creators';
 import './App.css';
 
 import HomePage from './components/homepage/homepage';
+import Contact from './components/contact/contact'
 
 class App extends Component {
   render() {
     return (
       <div>
-
         <div className="left"></div>
         <div className="right"></div>
         <div className="top"></div>
         <div className="bottom"></div>
-
-        <button
-          onClick={ () => this.props.toggleHomePage(!this.props.shouldShowHomePage) }
-          className="btn btn-primary center-block homepage-button">
-          Toggle HomePage
-        </button>
-
-        <HomePage>
-          { this.props.shouldShowHomePage ? <div>Hello World</div> : null }
-        </HomePage>
-
+        <div className="container">
+        { this.props.shouldShowHomePage ? <HomePage /> : null }
+        { this.props.shouldShowContactPage ? <Contact /> : null }
+        </div>
       </div>
     );
   }
@@ -32,12 +25,14 @@ class App extends Component {
 
 App.propTypes = {
   shouldShowHomePage: PropTypes.bool,
+  shouldShowContactPage: PropTypes.bool,
   toggleHomePage: PropTypes.func
 };
 
 const mapStateToProps = (state) => {
   return {
-    shouldShowHomePage: state.app.showHomePage
+    shouldShowHomePage: state.app.showHomePage,
+    shouldShowContactPage: state.app.showContactPage
   }
 };
 

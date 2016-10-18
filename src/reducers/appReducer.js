@@ -11,7 +11,7 @@ const toggleHomePage = (state, action) =>
   state.set("showHomePage", action.shouldShow)
 
 const toggleContactPage = (state, action) =>
-  state.set("showContactPage", !state.app.showContactPage)
+  state.set("showContactPage", action.shouldShow)
 
 const ACTION_HANDLERS = {
   [Types.SHOW_HOMEPAGE]: toggleHomePage,
